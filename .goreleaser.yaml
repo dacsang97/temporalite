@@ -9,18 +9,23 @@ builds:
       - CGO_ENABLED=0
     goos:
       - linux
-      - windows
       - darwin
     goarch:
       - amd64
       - arm64
+dockers:
+  - id: "temporalite"
+    image_templates:
+      - "ghcr.io/dacsang97/temporalite:{{ .Tag }}"
+      - "ghcr.io/dacsang97/temporalite:latest"
+    dockerfile: ./build/Dockerfile
 checksum:
-  name_template: 'checksums.txt'
+  name_template: "checksums.txt"
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
 changelog:
   sort: asc
   filters:
     exclude:
-      - '^docs:'
-      - '^test:'
+      - "^docs:"
+      - "^test:"
